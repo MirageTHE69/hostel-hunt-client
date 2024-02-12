@@ -12,14 +12,22 @@
     "gatsby-source-filesystem": "^5.13.1",
     "gatsby-transformer-sharp": "^5.13.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-router-dom": "^6.22.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.17",
+    "axios": "^0.26.1",
+    "dotenv": "^16.0.1",
+    "formik": "^2.2.9",
     "gatsby-plugin-postcss": "^6.13.1",
     "postcss": "^8.4.35",
     "prettier": "^2.8.8",
-    "tailwindcss": "^3.4.1"
+    "react-chartjs-2": "^4.1.0",
+    "react-helmet": "^6.1.0",
+    "react-query": "^3.39.0",
+    "react-toastify": "^8.2.0",
+    "tailwindcss": "^3.4.1",
+    "yup": "^0.32.11"
   },
   "keywords": [
     "gatsby"
