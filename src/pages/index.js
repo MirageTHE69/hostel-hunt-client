@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { navigate } from "gatsby";
 import login from "../services/authService.js";
 import Seo from "../components/seo";
+import { Link } from "gatsby";
+
 
 const IndexPage = () => {
   const [email, setEmail] = useState("");
@@ -56,7 +58,9 @@ const IndexPage = () => {
                 Continue
               </button>
             </form>
+            <Link to="/register" className="w-full h-full mt-10 text-center block">Register here</Link>
           </div>
+          
         </div>
       </div>
       <Seo title="Home" />
