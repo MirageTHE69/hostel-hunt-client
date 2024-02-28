@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Hero from "../images/Hero.jpg";
 import HostelService from "../services/nearbyService.js";
+import CityHostelService from '../services/cityHostelService.js';
 
 const Dashboard = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [nearbyHostels, setNearbyHostels] = useState([]);
   const [selectedHostel, setSelectedHostel] = useState(null);
+  const [cityName, setCityName] = useState("");
 
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(
@@ -33,6 +35,15 @@ const Dashboard = () => {
     }
   };
 
+  const fetchCityHostels = async () => {
+    try {
+      const response = await CityHostelService.getCityHostels(cityName);
+      setNearbyHostels(response.data.hostels);
+    } catch (error) {
+      console.error("Error fetching city hostels:", error.message);
+    }
+  };
+
   const handleHostelClick = (hostel) => {
     setSelectedHostel(hostel);
   };
@@ -42,8 +53,15 @@ const Dashboard = () => {
   };
 
   const handleShowDetailPage = (id) => {
-    // Redirect to the hostel detail page with the specific hostel ID in the URL
     window.location.href = `/hostelDetail?id=${id}`;
+  };
+
+  const handleSearch = () => {
+    if (cityName.trim() !== "") {
+      fetchCityHostels();
+    } else {
+      getLocation();
+    }
   };
 
   return (
@@ -58,16 +76,19 @@ const Dashboard = () => {
           <div>
             <input
               type="text"
-              placeholder="Name"
+              placeholder="Enter city name"
+              value={cityName}
+              onChange={(e) => setCityName(e.target.value)}
               className="mr-4 rounded-md border border-gray-300 px-4 py-2"
             />
-            <select className="mr-4 rounded-md border border-gray-300 px-4 py-2">
-              <option value="1">Person 1</option>
-              <option value="2">Person 2</option>
-              <option value="3">Person 3</option>
-            </select>
             <button
               className="rounded-md bg-blue-400 px-4 py-2 text-white"
+              onClick={handleSearch}
+            >
+              Search
+            </button>
+            <button
+              className="rounded-md bg-blue-400 px-4 py-2 text-white ml-2"
               onClick={getLocation}
             >
               Get Location
